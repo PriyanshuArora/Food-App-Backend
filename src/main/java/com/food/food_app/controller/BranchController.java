@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.food.food_app.dto.Branch;
@@ -41,13 +40,13 @@ public class BranchController {
 		return branchService.findBranchById(id);
 	}
 
-	@PutMapping("/updatebranch")
-	public ResponseEntity<ResponceStructure<Branch>> updateBranch(@RequestBody Branch branch, @RequestParam int id) {
+	@PutMapping("/updatebranch/{id}")
+	public ResponseEntity<ResponceStructure<Branch>> updateBranch(@RequestBody Branch branch, @PathVariable int id) {
 		return branchService.updateBranch(branch, id);
 	}
 
-	@DeleteMapping("/deletebranch")
-	public ResponseEntity<ResponceStructure<Branch>> deleteBranch(@RequestParam int id) {
+	@DeleteMapping("/deletebranch/{id}")
+	public ResponseEntity<ResponceStructure<Branch>> deleteBranch(@PathVariable int id) {
 		return branchService.deleteBranch(id);
 	}
 

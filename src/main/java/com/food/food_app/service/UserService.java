@@ -49,8 +49,17 @@ public class UserService {
 	}
 
 	public ResponseEntity<ResponceStructure<User>> updateUser(User user, int id) {
+		if (userDao.findUserByEmail(user.getEmail()) != null) {
+			throw new UserAlreadyExistException(user.getEmail());
+		} else if (!user.getRole().contains("Admin")) {
+			if (branchDao.findBranchById(user.getBranch().getId()).isEmpty()) {
+				throw new BranchNotFoundException(user.getBranch().getId());
+			}
+		} else if (user.getRole().contains("Admin")) {
+			user.setBranch(null);
+		} 
+		
 		user.setPassword(aes.encrypt(user.getPassword(), "secure"));
-
 		User temp = userDao.updateUser(user, id);
 		ResponceStructure<User> structure = new ResponceStructure<User>();
 		if (temp != null) {

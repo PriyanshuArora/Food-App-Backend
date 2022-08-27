@@ -33,6 +33,9 @@ public class BranchService {
 	}
 
 	public ResponseEntity<ResponceStructure<Branch>> updateBranch(Branch branch, int id) {
+		if (branchDao.findBranchByEmail(branch.getEmail()) != null) {
+			throw new BranchAlreadyExistException(branch.getEmail());
+		}
 		Branch temp = branchDao.updateBranch(branch, id);
 		ResponceStructure<Branch> structure = new ResponceStructure<Branch>();
 		if (temp != null) {

@@ -43,8 +43,8 @@ public class UserController {
 		return userService.findUserById(id);
 	}
 
-	@PutMapping("/updateuser")
-	public ResponseEntity<ResponceStructure<User>> updateUser(@RequestBody User user, @RequestParam int id) {
+	@PutMapping("/updateuser/{id}")
+	public ResponseEntity<ResponceStructure<User>> updateUser(@RequestBody User user, @PathVariable int id) {
 		return userService.updateUser(user, id);
 	}
 
