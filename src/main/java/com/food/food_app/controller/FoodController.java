@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.food.food_app.dto.Food;
@@ -41,13 +40,13 @@ public class FoodController {
 		return foodService.findFoodById(id);
 	}
 
-	@PutMapping("/updatefood")
-	public ResponseEntity<ResponceStructure<Food>> updateFood(@RequestBody Food food, @RequestParam int id) {
+	@PutMapping("/updatefood/{id}")
+	public ResponseEntity<ResponceStructure<Food>> updateFood(@RequestBody Food food, @PathVariable int id) {
 		return foodService.updateFood(food, id);
 	}
 
-	@DeleteMapping("/deletefood")
-	public ResponseEntity<ResponceStructure<Food>> deleteFood(@RequestParam int id) {
+	@DeleteMapping("/deletefood/{id}")
+	public ResponseEntity<ResponceStructure<Food>> deleteFood(@PathVariable int id) {
 		return foodService.deleteFood(id);
 	}
 

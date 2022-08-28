@@ -40,13 +40,13 @@ public class MenuController {
 		return menuService.findMenuById(id);
 	}
 
-	@PutMapping("/updatemenu")
-	public ResponseEntity<ResponceStructure<Menu>> updateMenu(@RequestBody Menu menu, @RequestParam int id) {
+	@PutMapping("/updatemenu/{id}")
+	public ResponseEntity<ResponceStructure<Menu>> updateMenu(@RequestBody Menu menu, @PathVariable int id) {
 		return menuService.updateMenu(menu, id);
 	}
 
-	@DeleteMapping("/deletemenu")
-	public ResponseEntity<ResponceStructure<Menu>> deleteMenu(@RequestParam int id) {
+	@DeleteMapping("/deletemenu/{id}")
+	public ResponseEntity<ResponceStructure<Menu>> deleteMenu(@PathVariable int id) {
 		return menuService.deleteMenu(id);
 	}
 
