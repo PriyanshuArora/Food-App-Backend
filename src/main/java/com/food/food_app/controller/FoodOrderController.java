@@ -41,8 +41,8 @@ public class FoodOrderController {
 		return foodOrderService.findFoodOrderById(id);
 	}
 
-	@PutMapping("/updatefoodorder")
-	public ResponseEntity<ResponceStructure<FoodOrder>> updateFoodOrder(@RequestBody FoodOrder foodOrder, @RequestParam int id) {
+	@PutMapping("/updatefoodorder/{id}")
+	public ResponseEntity<ResponceStructure<FoodOrder>> updateFoodOrder(@RequestBody FoodOrder foodOrder, @PathVariable int id) {
 		return foodOrderService.updateFoodOrder(foodOrder, id);
 	}
 
