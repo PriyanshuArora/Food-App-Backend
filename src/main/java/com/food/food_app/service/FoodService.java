@@ -18,7 +18,7 @@ public class FoodService {
 
 	@Autowired
 	FoodDao foodDao;
-	
+
 	// Food
 	public ResponseEntity<ResponceStructure<Food>> saveFood(Food food) {
 		ResponceStructure<Food> structure = new ResponceStructure<Food>();
@@ -27,7 +27,7 @@ public class FoodService {
 		structure.setT(foodDao.saveFood(food));
 		return new ResponseEntity<ResponceStructure<Food>>(structure, HttpStatus.CREATED);
 	}
-	
+
 	public ResponseEntity<ResponceStructure<Food>> updateFood(Food food, int id) {
 		Food temp = foodDao.updateFood(food, id);
 		ResponceStructure<Food> structure = new ResponceStructure<Food>();
@@ -40,7 +40,7 @@ public class FoodService {
 			throw new FoodNotAvailableException(id);
 		}
 	}
-	
+
 	public ResponseEntity<ResponceStructure<Food>> findFoodById(int id) {
 		Optional<Food> optional = foodDao.findFoodById(id);
 		if (optional.isEmpty()) {
@@ -65,6 +65,16 @@ public class FoodService {
 		} else {
 			throw new FoodNotAvailableException(id);
 		}
+	}
+
+	public ResponseEntity<ResponceStructure<Food>> changeAvailabilityFood(int id) {
+		Food food = foodDao.findFoodById(id).get();
+		food.setAvailability(!food.isAvailability());
+		ResponceStructure<Food> structure = new ResponceStructure<Food>();
+		structure.setMessage("Food Deleted Successfully!");
+		structure.setStatus(HttpStatus.OK.value());
+		structure.setT(foodDao.updateFood(food, id));
+		return new ResponseEntity<ResponceStructure<Food>>(structure, HttpStatus.OK);
 	}
 
 	public ResponseEntity<ResponceStructure<List<Food>>> findAllFood() {

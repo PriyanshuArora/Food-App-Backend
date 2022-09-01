@@ -44,6 +44,11 @@ public class FoodController {
 	public ResponseEntity<ResponceStructure<Food>> updateFood(@RequestBody Food food, @PathVariable int id) {
 		return foodService.updateFood(food, id);
 	}
+	
+	@GetMapping("/foodavailability/{id}")
+	public ResponseEntity<ResponceStructure<Food>> changeAvailabilityFood(@PathVariable int id) {
+		return foodService.changeAvailabilityFood(id);
+	}
 
 	@DeleteMapping("/deletefood/{id}")
 	public ResponseEntity<ResponceStructure<Food>> deleteFood(@PathVariable int id) {
